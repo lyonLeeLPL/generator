@@ -3,6 +3,8 @@ package com.baomidou.mybatisplus.generator.samples;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
+import com.baomidou.mybatisplus.generator.config.StrategyConfig;
+import com.baomidou.mybatisplus.generator.config.builder.Entity;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -46,8 +48,10 @@ public class PostgreSQLGeneratorTest extends BaseGeneratorTest {
     @Test
     public void testSimple() {
         AutoGenerator generator = new AutoGenerator(DATA_SOURCE_CONFIG);
-        generator.strategy(strategyConfig().addInclude("").build());
-        generator.global(globalConfig().outputDir("C://workspace//code_generator").build());
+        Entity.Builder builder = strategyConfig().addInclude("ams_t0001").entityBuilder().enableTableFieldAnnotation();
+        StrategyConfig strategyConfig = builder.build();
+        generator.strategy(strategyConfig);
+        generator.global(globalConfig().outputDir("C://workspace//code_generator").fileOverride().build());
         generator.execute();
     }
 }
